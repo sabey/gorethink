@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## v3.0.6 - 2018-09-03
+
+- Replaced `fatih/pool` with `sabey/lagoon`
+
 ## v3.0.5 - 2017-09-28
 
 - Fixed typo at http opts

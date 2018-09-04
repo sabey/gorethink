@@ -1,17 +1,13 @@
 # GoRethink - RethinkDB Driver for Go
 
-[![GitHub tag](https://img.shields.io/github/tag/GoRethink/gorethink.svg?style=flat)](https://github.com/GoRethink/gorethink/releases)
-[![GoDoc](https://godoc.org/github.com/GoRethink/gorethink?status.svg)](https://godoc.org/github.com/GoRethink/gorethink)
-[![Build status](https://travis-ci.org/GoRethink/gorethink.svg?branch=master)](https://travis-ci.org/GoRethink/gorethink)
-<!-- [![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/) -->
+[![GoDoc](https://godoc.org/sabey.co/gorethink?status.svg)](https://godoc.org/sabey.co/gorethink)
 
 [Go](http://golang.org/) driver for [RethinkDB](http://www.rethinkdb.com/)
 
-![GoRethink Logo](https://raw.github.com/wiki/gorethink/gorethink/gopher-and-thinker-s.png "Golang Gopher and RethinkDB Thinker")
+![GoRethink Logo](https://raw.github.com/wiki/sabey/gorethink/gopher-and-thinker-s.png "Golang Gopher and RethinkDB Thinker")
 
-Current version: v3.0.5 (RethinkDB v2.3)
+Current version: v3.0.6 (RethinkDB v2.3)
 
-<!-- This project is no longer maintained, for more information see the [v3.0.0 release](https://github.com/gorethink/gorethink/releases/tag/v3.0.0)-->
 
 Please note that this version of the driver only supports versions of RethinkDB using the v0.4 protocol (any versions of the driver older than RethinkDB 2.0 will not work).
 
@@ -84,7 +80,7 @@ func ExampleConnect() {
 }
 ```
 
-See the [documentation](http://godoc.org/github.com/gorethink/gorethink#Connect) for a list of supported arguments to Connect().
+See the [documentation](http://godoc.org/github.com/sabey/gorethink#Connect) for a list of supported arguments to Connect().
 
 ### Connection Pool
 
@@ -163,7 +159,7 @@ Please note that `DiscoverHosts` will not work with user authentication at this 
 
 This library is based on the official drivers so the code on the [API](http://www.rethinkdb.com/api/) page should require very few changes to work.
 
-To view full documentation for the query functions check the [API reference](https://github.com/gorethink/gorethink/wiki/Go-ReQL-command-reference) or [GoDoc](http://godoc.org/github.com/gorethink/gorethink#Term)
+To view full documentation for the query functions check the [API reference](https://github.com/sabey/gorethink/wiki/Go-ReQL-command-reference) or [GoDoc](http://godoc.org/sabey.co/gorethink#Term)
 
 Slice Expr Example
 ```go
@@ -312,7 +308,7 @@ If you wish to use the `json` tags for GoRethink then you can call `SetTags("gor
 RethinkDB contains some special types which can be used to store special value types, currently supports are binary values, times and geometry data types. GoRethink supports these data types natively however there are some gotchas:
  - Time types: To store times in RethinkDB with GoRethink you must pass a `time.Time` value to your query, due to the way Go works type aliasing or embedding is not support here
  - Binary types: To store binary data pass a byte slice (`[]byte`) to your query
- - Geometry types: As Go does not include any built-in data structures for storing geometry data GoRethink includes its own in the `github.com/gorethink/gorethink/types` package, Any of the types (`Geometry`, `Point`, `Line` and `Lines`) can be passed to a query to create a RethinkDB geometry type.
+ - Geometry types: As Go does not include any built-in data structures for storing geometry data GoRethink includes its own in the `github.com/sabey/gorethink/types` package, Any of the types (`Geometry`, `Point`, `Line` and `Lines`) can be passed to a query to create a RethinkDB geometry type.
 
 ### Compound Keys
 
@@ -396,9 +392,9 @@ r.Table("books").Get("book_1").Merge(func(p r.Term) interface{} {
 
 ### Custom `Marshaler`s/`Unmarshaler`s
 
-Sometimes the default behaviour for converting Go types to and from ReQL is not desired, for these situations the driver allows you to implement both the [`Marshaler`](https://godoc.org/github.com/gorethink/gorethink/encoding#Marshaler) and [`Unmarshaler`](https://godoc.org/github.com/gorethink/gorethink/encoding#Unmarshaler) interfaces. These interfaces might look familiar if you are using to using the `encoding/json` package however instead of dealing with `[]byte` the interfaces deal with `interface{}` values (which are later encoded by the `encoding/json` package when communicating with the database).
+Sometimes the default behaviour for converting Go types to and from ReQL is not desired, for these situations the driver allows you to implement both the [`Marshaler`](https://godoc.org/sabey.co/gorethink/encoding#Marshaler) and [`Unmarshaler`](https://godoc.org/sabey.co/gorethink/encoding#Unmarshaler) interfaces. These interfaces might look familiar if you are using to using the `encoding/json` package however instead of dealing with `[]byte` the interfaces deal with `interface{}` values (which are later encoded by the `encoding/json` package when communicating with the database).
 
-An good example of how to use these interfaces is in the [`types`](https://github.com/gorethink/gorethink/blob/master/types/geometry.go#L84-L106) package, in this package the `Point` type is encoded as the `GEOMETRY` pseudo-type instead of a normal JSON object.
+An good example of how to use these interfaces is in the [`types`](https://github.com/sabey/blob/master/types/geometry.go#L84-L106) package, in this package the `Point` type is encoded as the `GEOMETRY` pseudo-type instead of a normal JSON object.
 
 ## Logging
 
@@ -482,7 +478,7 @@ BenchmarkSequentialSoftWritesParallel10      10000                           263
 
 ## Examples
 
-Many functions have examples and are viewable in the godoc, alternatively view some more full features examples on the [wiki](https://github.com/gorethink/gorethink/wiki/Examples).
+Many functions have examples and are viewable in the godoc, alternatively view some more full features examples on the [wiki](https://github.com/sabey/gorethink/wiki/Examples).
 
 Another good place to find examples are the tests, almost every term will have a couple of tests that demonstrate how they can be used.
 
@@ -491,23 +487,3 @@ Another good place to find examples are the tests, almost every term will have a
 - [GoRethink Goes 1.0](https://www.compose.io/articles/gorethink-goes-1-0/)
 - [Go, RethinkDB & Changefeeds](https://www.compose.io/articles/go-rethinkdb-and-changefeeds-part-1/)
 - [Build an IRC bot in Go with RethinkDB changefeeds](http://rethinkdb.com/blog/go-irc-bot/)
-
-## License
-
-Copyright 2013 Daniel Cannon
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-  http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
-## Donations
-
-[![Donations](https://pledgie.com/campaigns/29517.png "Donations")](https://pledgie.com/campaigns/29517)
