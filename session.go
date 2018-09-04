@@ -4,6 +4,7 @@ import (
 	"crypto/tls"
 	"golang.org/x/net/context"
 	p "sabey.co/gorethink/ql2"
+	"sabey.co/lagoon"
 	"sync"
 	"time"
 )
@@ -79,6 +80,8 @@ type ConnectOpts struct {
 	// connections are being used then the driver will open new connections as
 	// needed however they will not be returned to the pool. By default the
 	// maximum number of connections is 2
+	//
+	// used as a value for LagoonBuffer if LagoonBuffer is nil
 	MaxOpen int `gorethink:"max_open,omitempty"`
 
 	// Below options are for cluster discovery, please note there is a high
@@ -97,6 +100,13 @@ type ConnectOpts struct {
 	NodeRefreshInterval time.Duration `gorethink:"node_refresh_interval,omitempty"`
 	// Deprecated: Use InitialCap instead
 	MaxIdle int `gorethink:"max_idle,omitempty"`
+
+	// Lagoon Shared Buffer
+	// if buffer is not set, a new buffer is created for each pool, MaxOpen is used as the maximum pool value
+	LagoonBuffer *lagoon.Buffer
+	// Lagoon Timeout
+	// if timeout is not set, defaults to 30 seconds
+	LagoonTimeout time.Duration
 }
 
 func (o ConnectOpts) toMap() map[string]interface{} {

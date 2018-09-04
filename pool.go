@@ -4,9 +4,10 @@ import (
 	"errors"
 	"fmt"
 	"golang.org/x/net/context"
-	"gopkg.in/fatih/pool.v2"
 	"net"
+	"sabey.co/lagoon"
 	"sync"
+	"time"
 )
 
 var (
@@ -18,7 +19,7 @@ type Pool struct {
 	host Host
 	opts *ConnectOpts
 
-	pool pool.Pool
+	pool *lagoon.Lagoon
 
 	mu     sync.RWMutex // protects following fields
 	closed bool
@@ -33,25 +34,38 @@ func NewPool(host Host, opts *ConnectOpts) (*Pool, error) {
 		initialCap = opts.MaxIdle
 	}
 
-	maxOpen := opts.MaxOpen
-	if maxOpen <= 0 {
-		maxOpen = 2
+	l_config := &lagoon.Config{
+		Dial: func() (net.Conn, error) {
+			conn, err := NewConnection(host.String(), opts)
+			if err != nil {
+				return nil, err
+			}
+
+			return conn, err
+		},
+		DialInitial: initialCap,
+		Buffer:      opts.LagoonBuffer,
+	}
+	if l_config.Buffer == nil {
+		// create a new buffer
+		maxOpen := opts.MaxOpen
+		if maxOpen <= 0 {
+			maxOpen = 2
+		}
+		timeout := opts.LagoonTimeout
+		if timeout <= 0 {
+			timeout = time.Second * 30
+		}
+		l_config.Buffer = lagoon.CreateBuffer(maxOpen, timeout)
 	}
 
-	p, err := pool.NewChannelPool(initialCap, maxOpen, func() (net.Conn, error) {
-		conn, err := NewConnection(host.String(), opts)
-		if err != nil {
-			return nil, err
-		}
-
-		return conn, err
-	})
+	l, err := lagoon.CreateLagoon(l_config)
 	if err != nil {
 		return nil, err
 	}
 
 	return &Pool{
-		pool: p,
+		pool: l,
 		host: host,
 		opts: opts,
 	}, nil
@@ -83,7 +97,7 @@ func (p *Pool) Close() error {
 	return nil
 }
 
-func (p *Pool) conn() (*Connection, *pool.PoolConn, error) {
+func (p *Pool) conn() (*Connection, *lagoon.Connection, error) {
 	p.mu.RLock()
 	defer p.mu.RUnlock()
 
@@ -91,12 +105,12 @@ func (p *Pool) conn() (*Connection, *pool.PoolConn, error) {
 		return nil, nil, errPoolClosed
 	}
 
-	nc, err := p.pool.Get()
+	nc, err := p.pool.Dial()
 	if err != nil {
 		return nil, nil, err
 	}
 
-	pc, ok := nc.(*pool.PoolConn)
+	pc, ok := nc.(*lagoon.Connection)
 	if !ok {
 		// This should never happen!
 		return nil, nil, fmt.Errorf("Invalid connection in pool")
@@ -146,7 +160,7 @@ func (p *Pool) Exec(ctx context.Context, q Query) error {
 	_, _, err = c.Query(ctx, q)
 
 	if c.isBad() {
-		pc.MarkUnusable()
+		pc.Disable()
 	}
 
 	return err
@@ -164,7 +178,7 @@ func (p *Pool) Query(ctx context.Context, q Query) (*Cursor, error) {
 	if err == nil {
 		cursor.releaseConn = releaseConn(c, pc)
 	} else if c.isBad() {
-		pc.MarkUnusable()
+		pc.Disable()
 	}
 
 	return cursor, err
@@ -183,16 +197,16 @@ func (p *Pool) Server() (ServerResponse, error) {
 	response, err = c.Server()
 
 	if c.isBad() {
-		pc.MarkUnusable()
+		pc.Disable()
 	}
 
 	return response, err
 }
 
-func releaseConn(c *Connection, pc *pool.PoolConn) func() error {
+func releaseConn(c *Connection, pc *lagoon.Connection) func() error {
 	return func() error {
 		if c.isBad() {
-			pc.MarkUnusable()
+			pc.Disable()
 		}
 
 		return pc.Close()
