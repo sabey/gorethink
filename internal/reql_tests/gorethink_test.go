@@ -5,8 +5,7 @@ package reql_tests
 import (
 	"flag"
 	"os"
-
-	r "gopkg.in/gorethink/gorethink.v3"
+	r "sabey.co/gorethink"
 )
 
 var url string

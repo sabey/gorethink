@@ -4,12 +4,11 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
+	test "gopkg.in/check.v1"
 	"math/rand"
 	"os"
 	"testing"
 	"time"
-
-	test "gopkg.in/check.v1"
 )
 
 var session *Session

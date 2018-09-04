@@ -1,7 +1,7 @@
 package gorethink
 
 import (
-	p "gopkg.in/gorethink/gorethink.v3/ql2"
+	p "sabey.co/gorethink/ql2"
 )
 
 // Now returns a time object representing the current time in UTC

@@ -2,9 +2,8 @@ package gorethink
 
 import (
 	"fmt"
-	"time"
-
 	test "gopkg.in/check.v1"
+	"time"
 )
 
 type object struct {

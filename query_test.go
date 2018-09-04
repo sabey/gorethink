@@ -3,11 +3,10 @@ package gorethink
 import (
 	"bytes"
 	"encoding/json"
+	test "gopkg.in/check.v1"
 	"sync"
 	"testing"
 	"time"
-
-	test "gopkg.in/check.v1"
 )
 
 func (s *RethinkSuite) TestQueryRun(c *test.C) {

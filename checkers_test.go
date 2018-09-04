@@ -3,10 +3,8 @@ package gorethink
 import (
 	"encoding/json"
 	"fmt"
-
 	test "gopkg.in/check.v1"
-
-	"gopkg.in/gorethink/gorethink.v3/types"
+	"sabey.co/gorethink/types"
 )
 
 type jsonChecker struct {

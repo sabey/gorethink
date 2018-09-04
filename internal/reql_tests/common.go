@@ -2,15 +2,14 @@ package reql_tests
 
 import (
 	"fmt"
+	"github.com/stretchr/testify/suite"
 	"math"
 	"reflect"
 	"regexp"
+	r "sabey.co/gorethink"
+	"sabey.co/gorethink/internal/compare"
 	"strings"
 	"time"
-
-	"github.com/stretchr/testify/suite"
-	r "gopkg.in/gorethink/gorethink.v3"
-	"gopkg.in/gorethink/gorethink.v3/internal/compare"
 )
 
 func maybeRun(query interface{}, session *r.Session, opts r.RunOpts) interface{} {

@@ -5,13 +5,12 @@ import (
 	"encoding/binary"
 	"encoding/json"
 	"fmt"
+	"golang.org/x/net/context"
 	"net"
+	p "sabey.co/gorethink/ql2"
 	"sync"
 	"sync/atomic"
 	"time"
-
-	"golang.org/x/net/context"
-	p "gopkg.in/gorethink/gorethink.v3/ql2"
 )
 
 const (

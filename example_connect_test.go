@@ -3,8 +3,7 @@ package gorethink_test
 import (
 	"log"
 	"os"
-
-	r "gopkg.in/gorethink/gorethink.v3"
+	r "sabey.co/gorethink"
 )
 
 var session *r.Session

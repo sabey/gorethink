@@ -1,7 +1,7 @@
 package gorethink
 
 import (
-	p "gopkg.in/gorethink/gorethink.v3/ql2"
+	p "sabey.co/gorethink/ql2"
 )
 
 // InsertOpts contains the optional arguments for the Insert term

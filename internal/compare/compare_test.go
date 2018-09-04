@@ -1,6 +1,8 @@
 package compare
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestCompareString(t *testing.T) {
 

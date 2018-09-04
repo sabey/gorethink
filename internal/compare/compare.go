@@ -2,13 +2,12 @@ package compare
 
 import (
 	"fmt"
+	"github.com/stretchr/testify/assert"
 	"math"
 	"reflect"
 	"regexp"
 	"strconv"
 	"testing"
-
-	"github.com/stretchr/testify/assert"
 )
 
 var AnythingIsFine = "reql_test.AnythingIsFine"

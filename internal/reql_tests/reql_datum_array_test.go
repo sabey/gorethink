@@ -5,12 +5,11 @@
 package reql_tests
 
 import (
+	"github.com/stretchr/testify/suite"
+	r "sabey.co/gorethink"
+	"sabey.co/gorethink/internal/compare"
 	"testing"
 	"time"
-
-	"github.com/stretchr/testify/suite"
-	r "gopkg.in/gorethink/gorethink.v3"
-	"gopkg.in/gorethink/gorethink.v3/internal/compare"
 )
 
 // Tests conversion to and from the RQL array type

@@ -3,10 +3,9 @@ package reql_tests
 import (
 	"testing"
 	"time"
-
 	"github.com/stretchr/testify/suite"
-    r "gopkg.in/gorethink/gorethink.v3"
-	"gopkg.in/gorethink/gorethink.v3/internal/compare"
+    r "sabey.co/gorethink"
+	"sabey.co/gorethink/internal/compare"
 )
 
 // ${description}

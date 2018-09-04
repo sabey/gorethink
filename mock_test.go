@@ -2,7 +2,6 @@ package gorethink
 
 import (
 	"fmt"
-
 	test "gopkg.in/check.v1"
 )
 

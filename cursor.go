@@ -4,12 +4,11 @@ import (
 	"bytes"
 	"encoding/json"
 	"errors"
-	"reflect"
-	"sync"
-
 	"golang.org/x/net/context"
-	"gopkg.in/gorethink/gorethink.v3/encoding"
-	p "gopkg.in/gorethink/gorethink.v3/ql2"
+	"reflect"
+	"sabey.co/gorethink/encoding"
+	p "sabey.co/gorethink/ql2"
+	"sync"
 )
 
 var (

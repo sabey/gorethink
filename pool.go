@@ -3,11 +3,10 @@ package gorethink
 import (
 	"errors"
 	"fmt"
-	"net"
-	"sync"
-
 	"golang.org/x/net/context"
 	"gopkg.in/fatih/pool.v2"
+	"net"
+	"sync"
 )
 
 var (

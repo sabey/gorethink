@@ -4,9 +4,8 @@ package gorethink
 
 import (
 	"fmt"
-	"time"
-
 	test "gopkg.in/check.v1"
+	"time"
 )
 
 func (s *RethinkSuite) TestClusterConnect(c *test.C) {

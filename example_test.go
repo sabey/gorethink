@@ -3,8 +3,7 @@ package gorethink_test
 import (
 	"fmt"
 	"log"
-
-	r "gopkg.in/gorethink/gorethink.v3"
+	r "sabey.co/gorethink"
 )
 
 func Example() {

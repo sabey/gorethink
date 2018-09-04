@@ -1,10 +1,9 @@
 package gorethink
 
 import (
+	test "gopkg.in/check.v1"
 	"os"
 	"time"
-
-	test "gopkg.in/check.v1"
 )
 
 func (s *RethinkSuite) TestSessionConnect(c *test.C) {

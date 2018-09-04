@@ -1,7 +1,7 @@
 package gorethink
 
 import (
-	p "gopkg.in/gorethink/gorethink.v3/ql2"
+	p "sabey.co/gorethink/ql2"
 )
 
 func newStopQuery(token int64) Query {

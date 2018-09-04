@@ -2,12 +2,11 @@ package gorethink
 
 import (
 	"reflect"
+	"sabey.co/gorethink/encoding"
+	p "sabey.co/gorethink/ql2"
 	"strconv"
 	"strings"
 	"sync/atomic"
-
-	"gopkg.in/gorethink/gorethink.v3/encoding"
-	p "gopkg.in/gorethink/gorethink.v3/ql2"
 )
 
 // Helper functions for constructing terms

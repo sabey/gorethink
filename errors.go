@@ -5,9 +5,8 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	p "sabey.co/gorethink/ql2"
 	"strings"
-
-	p "gopkg.in/gorethink/gorethink.v3/ql2"
 )
 
 var (

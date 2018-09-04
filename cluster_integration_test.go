@@ -4,9 +4,8 @@
 package gorethink
 
 import (
-	"time"
-
 	test "gopkg.in/check.v1"
+	"time"
 )
 
 func (s *RethinkSuite) TestClusterDetectNewNode(c *test.C) {

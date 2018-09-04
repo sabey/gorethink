@@ -2,11 +2,10 @@ package gorethink
 
 import (
 	"crypto/tls"
+	"golang.org/x/net/context"
+	p "sabey.co/gorethink/ql2"
 	"sync"
 	"time"
-
-	"golang.org/x/net/context"
-	p "gopkg.in/gorethink/gorethink.v3/ql2"
 )
 
 // A Session represents a connection to a RethinkDB cluster and should be used

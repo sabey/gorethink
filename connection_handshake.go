@@ -9,14 +9,12 @@ import (
 	"encoding/binary"
 	"encoding/json"
 	"fmt"
+	"golang.org/x/crypto/pbkdf2"
 	"hash"
 	"io"
+	p "sabey.co/gorethink/ql2"
 	"strconv"
 	"strings"
-
-	"golang.org/x/crypto/pbkdf2"
-
-	p "gopkg.in/gorethink/gorethink.v3/ql2"
 )
 
 type HandshakeVersion int

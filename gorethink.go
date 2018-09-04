@@ -1,12 +1,10 @@
 package gorethink
 
 import (
+	"github.com/sirupsen/logrus"
 	"io/ioutil"
 	"reflect"
-
-	"github.com/sirupsen/logrus"
-
-	"gopkg.in/gorethink/gorethink.v3/encoding"
+	"sabey.co/gorethink/encoding"
 )
 
 var (

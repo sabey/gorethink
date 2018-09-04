@@ -2,13 +2,11 @@ package gorethink
 
 import (
 	"encoding/base64"
+	"fmt"
 	"math"
+	"sabey.co/gorethink/types"
 	"strconv"
 	"time"
-
-	"gopkg.in/gorethink/gorethink.v3/types"
-
-	"fmt"
 )
 
 func convertPseudotype(obj map[string]interface{}, opts map[string]interface{}) (interface{}, error) {

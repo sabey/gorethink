@@ -1,10 +1,9 @@
 package gorethink
 
 import (
-	"sync"
-
 	"golang.org/x/net/context"
-	p "gopkg.in/gorethink/gorethink.v3/ql2"
+	p "sabey.co/gorethink/ql2"
+	"sync"
 )
 
 // Node represents a database server in the cluster

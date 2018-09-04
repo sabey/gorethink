@@ -2,15 +2,14 @@ package gorethink
 
 import (
 	"fmt"
+	"github.com/cenkalti/backoff"
+	"github.com/hailocab/go-hostpool"
+	"github.com/sirupsen/logrus"
+	"golang.org/x/net/context"
 	"strings"
 	"sync"
 	"sync/atomic"
 	"time"
-
-	"github.com/sirupsen/logrus"
-	"github.com/cenkalti/backoff"
-	"github.com/hailocab/go-hostpool"
-	"golang.org/x/net/context"
 )
 
 // A Cluster represents a connection to a RethinkDB cluster, a cluster is created

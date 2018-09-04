@@ -3,10 +3,8 @@ package gorethink
 import (
 	"encoding/base64"
 	"encoding/json"
-
 	"reflect"
-
-	p "gopkg.in/gorethink/gorethink.v3/ql2"
+	p "sabey.co/gorethink/ql2"
 )
 
 // Expr converts any value to an expression and is also used by many other terms
