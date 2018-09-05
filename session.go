@@ -52,6 +52,9 @@ type ConnectOpts struct {
 	ReadTimeout time.Duration `gorethink:"read_timeout,omitempty"`
 	// KeepAlivePeriod is the keep alive period used by the connection, by default
 	// this is 30s. It is not possible to disable keep alive messages
+	//
+	// used as a value for Lagoon IdleTimeout
+	// if not set, defaults to 3 minutes
 	KeepAlivePeriod time.Duration `gorethink:"keep_alive_timeout,omitempty"`
 	// TLSConfig holds the TLS configuration and can be used when connecting
 	// to a RethinkDB server protected by SSL
@@ -107,6 +110,10 @@ type ConnectOpts struct {
 	// Lagoon Timeout
 	// if timeout is not set, defaults to 30 seconds
 	LagoonTimeout time.Duration
+	// Lagoon TickEvery
+	// used to tick for IdleTimeout
+	// if not set, defaults to 15 seconds
+	LagoonTickEvery time.Duration
 }
 
 func (o ConnectOpts) toMap() map[string]interface{} {

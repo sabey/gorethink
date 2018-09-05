@@ -44,7 +44,15 @@ func NewPool(host Host, opts *ConnectOpts) (*Pool, error) {
 			return conn, err
 		},
 		DialInitial: initialCap,
+		IdleTimeout: opts.KeepAlivePeriod,
+		TickEvery:   opts.LagoonTickEvery,
 		Buffer:      opts.LagoonBuffer,
+	}
+	if l_config.IdleTimeout < 1 {
+		l_config.IdleTimeout = time.Minute * 3
+	}
+	if l_config.TickEvery < 1 {
+		l_config.TickEvery = time.Second * 15
 	}
 	if l_config.Buffer == nil {
 		// create a new buffer
