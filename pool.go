@@ -44,7 +44,7 @@ func NewPool(host Host, opts *ConnectOpts) (*Pool, error) {
 			return conn, err
 		},
 		DialInitial: initialCap,
-		IdleTimeout: opts.KeepAlivePeriod,
+		IdleTimeout: opts.LagoonIdleTimeout,
 		TickEvery:   opts.LagoonTickEvery,
 		Buffer:      opts.LagoonBuffer,
 	}
